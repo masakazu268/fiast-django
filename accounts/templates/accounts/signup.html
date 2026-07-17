@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="card card-auth my-5 mx-auto">
+    <div class="card-body">
+        <h5 class="card-title text-center">サインアップ</h5>
+
+        <!-- ① フォーム全体のエラー（パスワードの不一致、パスワードが単純すぎるなど）を表示 -->
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {% for error in form.non_field_errors %}
+            <div>{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" class="form-auth">
+            {% csrf_token %}
+
+            <!-- ユーザー名 -->
+            <div class="form-label-group mb-3">
+                {% render_field form.username class="form-control" placeholder="ユーザー名" %}
+                {% if form.username.errors %}
+                <div class="text-danger small">{{ form.username.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- メールアドレス -->
+            <div class="form-label-group mb-3">
+                {% render_field form.email class="form-control" placeholder="メールアドレス" %}
+                {% if form.email.errors %}
+                <div class="text-danger small">{{ form.email.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- パスワード -->
+            <div class="form-label-group mb-3">
+                {% render_field form.password1 class="form-control" placeholder="パスワード" type="password" %}
+                {% if form.password1.errors %}
+                <div class="text-danger small">{{ form.password1.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <!-- パスワード（確認） -->
+            <div class="form-label-group mb-3">
+                {% render_field form.password2 class="form-control" placeholder="パスワード（確認）" type="password" %}
+                {% if form.password2.errors %}
+                <div class="text-danger small">{{ form.password2.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" type="submit">サインアップ</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
