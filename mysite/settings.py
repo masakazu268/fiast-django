@@ -97,10 +97,14 @@ DATABASES = {
         # DATABASE_URL環境変数がない場合は、ローカルのSQLiteを使う（開発用）
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600,
-        ssl_require=True  # NeonはSSL接続が必須です
     )
 }
 
+# 本番環境（DATABASE_URLが存在する場合）のみ、PostgreSQL用のSSL設定を明示的に上書きする
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default']['OPTIONS'] = {
+        'sslmode': 'require',
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
