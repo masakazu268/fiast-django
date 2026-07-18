@@ -26,11 +26,8 @@ SECRET_KEY = 'django-insecure-4nhzvh!$q#$#9i-sqf7tv0s%lqn2k1csq&rwfg9_pthhaee@=v
 DEBUG = True
 
 
-ALLOWED_HOSTS = [
-    'fiast-django.onrender.com',  # RenderのURL
-    '127.0.0.1',                  # パソコンで開発する用
-    'localhost',                  # パソコンで開発する用
-]
+ALLOWED_HOSTS = ['*']
+    
 
 
 
