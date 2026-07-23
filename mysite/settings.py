@@ -154,10 +154,21 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 # ── Cloudinary の設定（ここに追記） ──
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+# ── Cloudinary の設定 ──
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
+# Django 4.2 以降の新しいストレージ設定（Django 6にも対応）
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
 }
 
 MEDIA_URL = '/media/'
