@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
+from pathlib import Path
 import os
 import sys
 import dotenv  # ← 追加
@@ -7,7 +8,9 @@ import dotenv  # ← 追加
 
 def main():
     """Run administrative tasks."""
-    dotenv.read_dotenv()  # ← 追加（.envファイルを読み込む）
+   # .env ファイルの絶対パスを指定して強制的によみこむ
+    env_path = Path(__file__).resolve().parent / '.env'
+    dotenv.load_dotenv(dotenv_path=env_path)
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
     try:
         from django.core.management import execute_from_command_line

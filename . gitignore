@@ -1,1 +1,24 @@
+# ── ローカル環境変数（パスワードやAPIキーなどの秘密情報） ──
 .env
+
+# ── Python / 仮想環境（ローカル専用のライブラリ群） ──
+myvenv/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# ── データベース（ローカルのテスト用SQLite） ──
+db.sqlite3
+
+# ── アップロード画像（ローカル動作確認時の画像） ──
+media/
+
+# ── 静的ファイル集約用 ──
+staticfiles/
+
+# ── Mac特有のシステムファイル ──
+.DS_Store
+
+# ── VS Code 設定（個人環境用） ──
+.vscode/
