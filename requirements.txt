@@ -5,5 +5,6 @@ psycopg2-binary
 cloudinary
 django-cloudinary-storage
 pillow
-panadas
+pandas
 requests
+python-dotenv  
