@@ -7,3 +7,4 @@ django-cloudinary-storage
 pillow
 python-dotenv
 django-widget-tweaks
+django-allauth
