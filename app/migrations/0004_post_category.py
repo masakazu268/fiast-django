@@ -4,6 +4,16 @@ import django.db.models.deletion
 from django.db import migrations, models
 
 
+# === 1. 初期カテゴリー（ID=1）を自動作成する処理を追加 ===
+def create_default_category(apps, schema_editor):
+    Category = apps.get_model('app', 'Category')
+    # ID=1 のカテゴリーが無ければ「未分類」という名前で作成
+    Category.objects.get_or_create(id=1, defaults={'name': '未分類'})
+
+def reverse_func(apps, schema_editor):
+        pass
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -11,6 +21,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        # === 2. AddField の「前」にカテゴリー作成を差し込む！ ===
+        migrations.RunPython(create_default_category, reverse_func),
+
         migrations.AddField(
             model_name='post',
             name='category',
