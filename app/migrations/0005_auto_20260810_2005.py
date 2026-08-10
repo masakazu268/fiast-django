@@ -20,7 +20,7 @@ def reverse_func(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0004_...'),  # ※自動記述された直前のマイグレーション名のままでOK
+        ('app', '0004_auto_20260805_0200'),  # ※自動記述された直前のマイグレーション名のままでOK
     ]
 
     operations = [
