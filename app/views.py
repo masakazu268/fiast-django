@@ -7,11 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class IndexView(View):
     def get(self, request, *args, **kwargs):
         post_data = Post.objects.order_by('-id')
-        category_list = Category.objects.all()  # ← 変数名を category_list に変更
+        categories  = Category.objects.all()  # ← 変数名を category_list に変更
         
         return render(request, 'app/index.html', {
             'post_data': post_data,
-            'category_list': category_list,     # ← category_list としてテンプレートに渡す
+            'category_list': categories,     # ← category_list としてテンプレートに渡す
         })
 
 
