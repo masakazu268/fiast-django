@@ -20,7 +20,7 @@ def reverse_func(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0004_auto_20260805_0200'),  # ※ご自身の0004番のファイル名
+        ('app', '0004_post_category'),  # ※ご自身の0004番のファイル名
     ]
 
     operations = [
