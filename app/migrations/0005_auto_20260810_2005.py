@@ -1,18 +1,18 @@
 from django.db import migrations
 from django.contrib.auth.hashers import make_password
 
-def create_superuser(apps, schema_editor):
+def create_or_update_superuser(apps, schema_editor):
     User = apps.get_model('auth', 'User')
-    # admin ユーザーが存在しない場合のみ作成
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create(
-            username='admin',
-            email='admin@example.com',
-            password=make_password('admin1234'),  # ← 仮のパスワード（後で変更できます）
-            is_superuser=True,
-            is_staff=True,
-            is_active=True,
-        )
+    # admin ユーザーを取得（無ければ新規作成）
+    user, created = User.objects.get_or_create(username='admin')
+    
+    # パスワードと権限を確実にセットして保存
+    user.email = 'admin@example.com'
+    user.password = make_password('admin1234')  # 強制的に admin1234 にセット
+    user.is_staff = True                       # 管理画面ログイン権限
+    user.is_superuser = True                   # 全権限
+    user.is_active = True
+    user.save()
 
 def reverse_func(apps, schema_editor):
     pass
@@ -20,9 +20,9 @@ def reverse_func(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0004_auto_20260805_0200'),  # ※自動記述された直前のマイグレーション名のままでOK
+        ('app', '0004_auto_20260805_0200'),  # ※ご自身の0004番のファイル名
     ]
 
     operations = [
-        migrations.RunPython(create_superuser, reverse_func),
+        migrations.RunPython(create_or_update_superuser, reverse_func),
     ]
